@@ -3,6 +3,8 @@ import sys
 import random
 
 from const import *
+from maze import create_maze
+from game_objects import create_pellets, create_ghosts
 
 
 class Main:
@@ -19,45 +21,13 @@ class Main:
         self.pacman_speed = 5
 
         # Ghosts
-        self.ghosts = [
-            {
-                "x": random.randint(0, WIDTH),
-                "y": random.randint(0, HEIGHT),
-                "speed_x": random.choice([-2, 2]),
-                "speed_y": random.choice([-2, 2]),
-            }
-            for _ in range(3)
-        ]
+        self.ghosts = create_ghosts(3)
 
         # Pellets
-        self.pellets = [
-            {"x": random.randint(0, WIDTH), "y": random.randint(0, HEIGHT)}
-            for _ in range(20)
-        ]
+        self.pellets = create_pellets(20)
 
         # Maze
-        self.maze = [
-            pygame.Rect(50, 50, 700, 20),
-            pygame.Rect(50, 50, 20, 700),
-            pygame.Rect(50, 750, 700, 20),
-            pygame.Rect(750, 50, 20, 720),
-            pygame.Rect(150, 150, 500, 20),
-            pygame.Rect(150, 150, 20, 300),
-            pygame.Rect(150, 400, 500, 20),
-            pygame.Rect(650, 150, 20, 270),
-            pygame.Rect(250, 250, 300, 20),
-            pygame.Rect(250, 250, 20, 150),
-            pygame.Rect(450, 250, 20, 150),
-            pygame.Rect(250, 400, 220, 20),
-            pygame.Rect(450, 400, 100, 20),
-            pygame.Rect(350, 350, 20, 50),
-            pygame.Rect(350, 350, 50, 20),
-            pygame.Rect(450, 350, 50, 20),
-            pygame.Rect(550, 250, 20, 150),
-            pygame.Rect(550, 400, 100, 20),
-            pygame.Rect(50, 650, 700, 20),
-            pygame.Rect(50, 550, 700, 20),
-        ]
+        self.maze = create_maze()
 
         # Score
         self.score = 0
